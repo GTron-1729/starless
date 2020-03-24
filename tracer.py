@@ -1,4 +1,7 @@
 #!/usr/bin/python
+#Run pip install scipy==1.1.0 because for higher versions of scipy it genrates AttributeError: module 'scipy.misc' has no attribute 'imread'
+## Try running on Ubuntu or other linux based OS because windows generates and error of ModuleNotFoundError: No module named '_curses'
+##So dont waste time if you encounter these errors just follow above steps :)
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -313,7 +316,7 @@ def rgbtosrgb(arr):
     arr[mask] **= 1/2.4
     arr[mask] *= 1.055
     arr[mask] -= 0.055
-    arr[-mask] *= 12.92
+    arr[~mask] *= 12.92 # TypeError: The numpy boolean negative, the `-` operator, is not supported, use the `~` operator or the logical_not function instead
 
 
 # convert from srgb to linear rgb
@@ -323,7 +326,7 @@ def srgbtorgb(arr):
     arr[mask] += 0.055
     arr[mask] /= 1.055
     arr[mask] **= 2.4
-    arr[-mask] /= 12.92
+    arr[~mask] /= 12.92 # TypeError: The numpy boolean negative, the `-` operator, is not supported, use the `~` operator or the logical_not function instead
 
 
 logger.debug("Loading textures...")
